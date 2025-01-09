@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sensor index{% endblock %}
+
+{% block body %}
+    <h1>Sensor index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DeviceId</th>
+                <th>DeviceType</th>
+                <th>SiteName</th>
+                <th>BuildingName</th>
+                <th>FloorNumber</th>
+                <th>WorkplaceId</th>
+                <th>InstallationDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sensor in sensors %}
+            <tr>
+                <td>{{ sensor.id }}</td>
+                <td>{{ sensor.deviceId }}</td>
+                <td>{{ sensor.deviceType }}</td>
+                <td>{{ sensor.siteName }}</td>
+                <td>{{ sensor.buildingName }}</td>
+                <td>{{ sensor.floorNumber }}</td>
+                <td>{{ sensor.workplaceId }}</td>
+                <td>{{ sensor.installationDate ? sensor.installationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_sensor_show', {'id': sensor.id}) }}">show</a>
+                    <a href="{{ path('app_sensor_edit', {'id': sensor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sensor_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sensor{% endblock %}
+
+{% block body %}
+    <h1>Sensor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sensor.id }}</td>
+            </tr>
+            <tr>
+                <th>DeviceId</th>
+                <td>{{ sensor.deviceId }}</td>
+            </tr>
+            <tr>
+                <th>DeviceType</th>
+                <td>{{ sensor.deviceType }}</td>
+            </tr>
+            <tr>
+                <th>SiteName</th>
+                <td>{{ sensor.siteName }}</td>
+            </tr>
+            <tr>
+                <th>BuildingName</th>
+                <td>{{ sensor.buildingName }}</td>
+            </tr>
+            <tr>
+                <th>FloorNumber</th>
+                <td>{{ sensor.floorNumber }}</td>
+            </tr>
+            <tr>
+                <th>WorkplaceId</th>
+                <td>{{ sensor.workplaceId }}</td>
+            </tr>
+            <tr>
+                <th>InstallationDate</th>
+                <td>{{ sensor.installationDate ? sensor.installationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sensor_index') }}">back to list</a>
+
+    <a href="{{ path('app_sensor_edit', {'id': sensor.id}) }}">edit</a>
+
+    {{ include('sensor/_delete_form.html.twig') }}
+{% endblock %}

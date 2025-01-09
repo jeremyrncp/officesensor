@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SensorData{% endblock %}
+
+{% block body %}
+    <h1>SensorData</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sensor_datum.id }}</td>
+            </tr>
+            <tr>
+                <th>Timestamp</th>
+                <td>{{ sensor_datum.timestamp }}</td>
+            </tr>
+            <tr>
+                <th>ClientName</th>
+                <td>{{ sensor_datum.clientName }}</td>
+            </tr>
+            <tr>
+                <th>MvtMessageCounter</th>
+                <td>{{ sensor_datum.mvtMessageCounter }}</td>
+            </tr>
+            <tr>
+                <th>BlockCounter</th>
+                <td>{{ sensor_datum.blockCounter }}</td>
+            </tr>
+            <tr>
+                <th>PayloadType</th>
+                <td>{{ sensor_datum.payloadType }}</td>
+            </tr>
+            <tr>
+                <th>FrameType</th>
+                <td>{{ sensor_datum.frameType }}</td>
+            </tr>
+            <tr>
+                <th>Temp</th>
+                <td>{{ sensor_datum.temp }}</td>
+            </tr>
+            <tr>
+                <th>Battery</th>
+                <td>{{ sensor_datum.battery }}</td>
+            </tr>
+            <tr>
+                <th>LowBatteryhreshold</th>
+                <td>{{ sensor_datum.lowBatteryhreshold }}</td>
+            </tr>
+            <tr>
+                <th>XPir</th>
+                <td>{{ sensor_datum.XPir }}</td>
+            </tr>
+            <tr>
+                <th>YPir</th>
+                <td>{{ sensor_datum.YPir }}</td>
+            </tr>
+            <tr>
+                <th>ZPir</th>
+                <td>{{ sensor_datum.ZPir }}</td>
+            </tr>
+            <tr>
+                <th>PirLength</th>
+                <td>{{ sensor_datum.PirLength }}</td>
+            </tr>
+            <tr>
+                <th>PirSens</th>
+                <td>{{ sensor_datum.PirSens }}</td>
+            </tr>
+            <tr>
+                <th>LightLevel</th>
+                <td>{{ sensor_datum.lightLevel }}</td>
+            </tr>
+            <tr>
+                <th>TempdLedBlink</th>
+                <td>{{ sensor_datum.tempdLedBlink }}</td>
+            </tr>
+            <tr>
+                <th>LedStatus</th>
+                <td>{{ sensor_datum.ledStatus }}</td>
+            </tr>
+            <tr>
+                <th>SleepMode</th>
+                <td>{{ sensor_datum.sleepMode }}</td>
+            </tr>
+            <tr>
+                <th>KeepaliveInterval</th>
+                <td>{{ sensor_datum.keepaliveInterval }}</td>
+            </tr>
+            <tr>
+                <th>DetectionBinSeq</th>
+                <td>{{ sensor_datum.detectionBinSeq }}</td>
+            </tr>
+            <tr>
+                <th>Dwinit</th>
+                <td>{{ sensor_datum.dwinit }}</td>
+            </tr>
+            <tr>
+                <th>DwInter</th>
+                <td>{{ sensor_datum.dwInter }}</td>
+            </tr>
+            <tr>
+                <th>DwEnd</th>
+                <td>{{ sensor_datum.dwEnd }}</td>
+            </tr>
+            <tr>
+                <th>PrevDwinit</th>
+                <td>{{ sensor_datum.prevDwinit }}</td>
+            </tr>
+            <tr>
+                <th>PrevDwIntra</th>
+                <td>{{ sensor_datum.prevDwIntra }}</td>
+            </tr>
+            <tr>
+                <th>PrevDwEnd</th>
+                <td>{{ sensor_datum.prevDwEnd }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sensor_data_index') }}">back to list</a>
+
+    <a href="{{ path('app_sensor_data_edit', {'id': sensor_datum.id}) }}">edit</a>
+
+    {{ include('sensor_data/_delete_form.html.twig') }}
+{% endblock %}

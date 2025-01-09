@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SensorData index{% endblock %}
+
+{% block body %}
+    <h1>SensorData index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Timestamp</th>
+                <th>ClientName</th>
+                <th>MvtMessageCounter</th>
+                <th>BlockCounter</th>
+                <th>PayloadType</th>
+                <th>FrameType</th>
+                <th>Temp</th>
+                <th>Battery</th>
+                <th>LowBatteryhreshold</th>
+                <th>XPir</th>
+                <th>YPir</th>
+                <th>ZPir</th>
+                <th>PirLength</th>
+                <th>PirSens</th>
+                <th>LightLevel</th>
+                <th>TempdLedBlink</th>
+                <th>LedStatus</th>
+                <th>SleepMode</th>
+                <th>KeepaliveInterval</th>
+                <th>DetectionBinSeq</th>
+                <th>Dwinit</th>
+                <th>DwInter</th>
+                <th>DwEnd</th>
+                <th>PrevDwinit</th>
+                <th>PrevDwIntra</th>
+                <th>PrevDwEnd</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sensor_datum in sensor_datas %}
+            <tr>
+                <td>{{ sensor_datum.id }}</td>
+                <td>{{ sensor_datum.timestamp }}</td>
+                <td>{{ sensor_datum.clientName }}</td>
+                <td>{{ sensor_datum.mvtMessageCounter }}</td>
+                <td>{{ sensor_datum.blockCounter }}</td>
+                <td>{{ sensor_datum.payloadType }}</td>
+                <td>{{ sensor_datum.frameType }}</td>
+                <td>{{ sensor_datum.temp }}</td>
+                <td>{{ sensor_datum.battery }}</td>
+                <td>{{ sensor_datum.lowBatteryhreshold }}</td>
+                <td>{{ sensor_datum.XPir }}</td>
+                <td>{{ sensor_datum.YPir }}</td>
+                <td>{{ sensor_datum.ZPir }}</td>
+                <td>{{ sensor_datum.PirLength }}</td>
+                <td>{{ sensor_datum.PirSens }}</td>
+                <td>{{ sensor_datum.lightLevel }}</td>
+                <td>{{ sensor_datum.tempdLedBlink }}</td>
+                <td>{{ sensor_datum.ledStatus }}</td>
+                <td>{{ sensor_datum.sleepMode }}</td>
+                <td>{{ sensor_datum.keepaliveInterval }}</td>
+                <td>{{ sensor_datum.detectionBinSeq }}</td>
+                <td>{{ sensor_datum.dwinit }}</td>
+                <td>{{ sensor_datum.dwInter }}</td>
+                <td>{{ sensor_datum.dwEnd }}</td>
+                <td>{{ sensor_datum.prevDwinit }}</td>
+                <td>{{ sensor_datum.prevDwIntra }}</td>
+                <td>{{ sensor_datum.prevDwEnd }}</td>
+                <td>
+                    <a href="{{ path('app_sensor_data_show', {'id': sensor_datum.id}) }}">show</a>
+                    <a href="{{ path('app_sensor_data_edit', {'id': sensor_datum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="28">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sensor_data_new') }}">Create new</a>
+{% endblock %}
