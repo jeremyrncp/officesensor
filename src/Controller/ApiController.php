@@ -21,7 +21,7 @@ class ApiController extends AbstractController
     ) {
     }
 
-    #[Route('/callback', name: 'app_api_callback', methods: ['POST'])]
+    #[Route('/api/callback', name: 'app_api_callback', methods: ['POST'])]
     public function callback(Request $request): Response
     {
         $apiKey = $request->query->get('apiKey');
