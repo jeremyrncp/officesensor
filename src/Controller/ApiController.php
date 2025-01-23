@@ -84,7 +84,7 @@ class ApiController extends AbstractController
     {
         $sensorRepository = $this->entityManager->getRepository(Sensor::class);
         $sensor = $sensorRepository->findOneBy([
-            'identifier' => $data['deviceId']
+            'deviceId' => $data['deviceId']
         ]);
 
         if ($sensor === null) {
@@ -120,7 +120,7 @@ class ApiController extends AbstractController
     {
         $sensorRepository = $this->entityManager->getRepository(Sensor::class);
         $sensor = $sensorRepository->findOneBy([
-            'identifier' => $data['deviceId']
+            'deviceId' => $data['deviceId']
         ]);
 
         if ($sensor === null) {
@@ -156,7 +156,7 @@ class ApiController extends AbstractController
     {
         $sensorRepository = $this->entityManager->getRepository(Sensor::class);
         $sensor = $sensorRepository->findOneBy([
-            'identifier' => $data['deviceId']
+            'deviceId' => $data['deviceId']
         ]);
 
         if ($sensor === null) {
@@ -185,7 +185,7 @@ class ApiController extends AbstractController
     {
         $sensorRepository = $this->entityManager->getRepository(Sensor::class);
         $sensor = $sensorRepository->findOneBy([
-            'identifier' => $data['deviceId']
+            'deviceId' => $data['deviceId']
         ]);
 
         if ($sensor === null) {
