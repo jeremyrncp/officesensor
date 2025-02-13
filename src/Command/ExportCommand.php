@@ -41,7 +41,7 @@ class ExportCommand extends Command
                 $data .= implode(";", $concatenedData) . PHP_EOL;
             }
 
-            file_put_contents(__DIR__ . "/../public/export/" . $queue->getFileName() . ".csv", $data);
+            file_put_contents(__DIR__ . "/../../public/export/" . $queue->getFileName() . ".csv", $data);
 
             $queue->setProcessedAt(new \DateTime());
         }
