@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\InMemoryUser;
 
 #[Route('/export')]
 class ExportQueueController extends AbstractController
@@ -23,8 +24,14 @@ class ExportQueueController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        if ($user instanceof InMemoryUser) {
+            $queues = $queueRepository->findBy([], ['id' => 'DESC']);
+        } else {
+            $queues = $queueRepository->findBy(["organization" => $user->getOrganization()], ['id' => 'DESC']);
+        }
+
         $pagination = $paginator->paginate(
-            $queueRepository->findBy(["organization" => $user->getOrganization()], ['id' => 'DESC']),
+            $queues,
             $request->query->getInt('page', 1),
             50
         );
