@@ -13,8 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\InMemoryUser;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/export')]
+#[IsGranted('ROLE_USER')]
 class ExportQueueController extends AbstractController
 {
     #[Route('/', name: 'app_export_queue_index', methods: ['GET'])]
