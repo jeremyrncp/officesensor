@@ -33,9 +33,6 @@ class ExportCommand extends Command
         /** @var Queue $queue */
         foreach ($queues as $queue) {
             $exportData = $this->exportService->export($queue->getOrganization(), $queue->getStart(), $queue->getEnd());
-
-            var_dump($exportData);
-
             $concatenedDatas = array_merge($this->exportService->exportHeaders(), $exportData);
 
             var_dump($concatenedDatas);
