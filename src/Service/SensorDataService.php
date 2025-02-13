@@ -59,13 +59,13 @@ class SensorDataService
         return [
             "occupancyStatus" => $occupancyStatus,
             "usageDuration" => $usageDuration,
-            "averageOccupancyRate" =>$countOccupancyTrue / count($dataFilteredWithDates),
+            "averageOccupancyRate" => (count($dataFilteredWithDates) === 0) ? $countOccupancyTrue : $countOccupancyTrue / count($dataFilteredWithDates),
             "peakUsageTime" => array_key_first($peakUsageTimes),
             "underUtilizedHours" => $underUtilizedhours / 3600,
-            "tempAvg" => $temperatureSum / count($dataFilteredWithDates),
+            "tempAvg" => (count($dataFilteredWithDates) === 0) ? $temperatureSum  : $temperatureSum / count($dataFilteredWithDates),
             "humAvg" => 0,
             "exportTimestamp" => time(),
-            "lightLevelAvg" => $ligtLevelSum / count($dataFilteredWithDates),
+            "lightLevelAvg" => (count($dataFilteredWithDates) === 0) ? $ligtLevelSum : $ligtLevelSum / count($dataFilteredWithDates),
             "noiseLevelAvg" => 0
         ];
     }
