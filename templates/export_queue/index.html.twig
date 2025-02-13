@@ -30,7 +30,7 @@
                 <td>{{ queue.processedAt ? queue.processedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     {% if queue.processedAt is not null %}
-                        <a href="export/{{ queue.fileName  }}.csv">download</a>
+                        <a href="/export/{{ queue.fileName  }}.csv">download</a>
                     {% endif %}
             </td>
             </tr>
