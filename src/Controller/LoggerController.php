@@ -6,6 +6,7 @@ use App\Entity\Logger;
 use App\Form\LoggerType;
 use App\Repository\LoggerRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,16 @@ use Symfony\Component\Routing\Attribute\Route;
 final class LoggerController extends AbstractController
 {
     #[Route(name: 'app_logger_index', methods: ['GET'])]
-    public function index(LoggerRepository $loggerRepository): Response
+    public function index(LoggerRepository $loggerRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $loggerRepository->findBy([], ['id' => 'DESC']),
+            $request->query->getInt('page', 1),
+            30
+        );
+
         return $this->render('logger/index.html.twig', [
-            'loggers' => $loggerRepository->findAll(),
+            'loggers' => $pagination,
         ]);
     }
 

@@ -34,6 +34,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_logger_new') }}">Create new</a>
+    <div class="pagination">
+        {{ knp_pagination_render(loggers) }}
+    </div>
 {% endblock %}

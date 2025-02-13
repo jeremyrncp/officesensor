@@ -6,6 +6,7 @@ use App\Entity\SensorData;
 use App\Form\SensorDataType;
 use App\Repository\SensorDataRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,16 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SensorDataController extends AbstractController
 {
     #[Route(name: 'app_sensor_data_index', methods: ['GET'])]
-    public function index(SensorDataRepository $sensorDataRepository): Response
+    public function index(SensorDataRepository $sensorDataRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $sensorDataRepository->findBy([], ['id' => 'DESC']),
+            $request->query->getInt('page', 1),
+            50
+        );
+
         return $this->render('sensor_data/index.html.twig', [
-            'sensor_datas' => $sensorDataRepository->findAll(),
+            'sensor_datas' => $pagination,
         ]);
     }
 
