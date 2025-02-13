@@ -22,8 +22,52 @@ class SensorDataService
             }
         }
 
-        
+        //initialized variables
+        $occupancyStatus = null;
+        $usageDuration = 0;
+        $countOccupancyTrue = 0;
+        $peakUsageTimes = [];
+        $underUtilizedhours = null;
+        $temperatureSum = 0;
+        $ligtLevelSum = 0;
 
+        /** @var SensorData $dataFilteredWithDate */
+        foreach ($dataFilteredWithDates as $dataFilteredWithDate) {
+            if ($this->analyseAndExcludeDetectionBinSeq($dataFilteredWithDate)) {
+                $occupancyStatus = 0;
+                $underUtilizedhours += 600;
+            } else {
+                $occupancyStatus = 1;
+                $countOccupancyTrue ++;
+
+                $date = (new \DateTime())->setTimestamp($dataFilteredWithDate->getTimestamp());
+
+                if (!array_key_exists($date->format("H"), $peakUsageTimes)) {
+                    $peakUsageTimes[$date->format("H")] = 0;
+                }
+
+                $peakUsageTimes[$date->format("H")] ++;
+            }
+
+            $temperatureSum += $dataFilteredWithDate->getTemp();
+            $usageDuration += 600;
+            $ligtLevelSum += $dataFilteredWithDate->getLightLevel();
+        }
+
+        asort($peakUsageTimes);
+
+        return [
+            "occupancyStatus" => $occupancyStatus,
+            "usageDuration" => $usageDuration,
+            "averageOccupancyRate" =>$countOccupancyTrue / count($dataFilteredWithDates),
+            "peakUsageTime" => array_key_first($peakUsageTimes),
+            "underUtilizedHours" => $underUtilizedhours / 3600,
+            "tempAvg" => $temperatureSum / count($dataFilteredWithDates),
+            "humAvg" => 0,
+            "exportTimestamp" => time(),
+            "lightLevelAvg" => $ligtLevelSum / count($dataFilteredWithDates),
+            "noiseLevelAvg" => 0
+        ];
     }
 
     public function analyseAndExcludeDetectionBinSeq(SensorData $sensorData): bool

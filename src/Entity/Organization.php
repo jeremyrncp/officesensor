@@ -27,9 +27,23 @@ class Organization
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'organization')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, Sensor>
+     */
+    #[ORM\OneToMany(targetEntity: Sensor::class, mappedBy: 'organization')]
+    private Collection $sensors;
+
+    /**
+     * @var Collection<int, Queue>
+     */
+    #[ORM\OneToMany(targetEntity: Queue::class, mappedBy: 'organization')]
+    private Collection $queues;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->sensors = new ArrayCollection();
+        $this->queues = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,5 +108,65 @@ class Organization
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Sensor>
+     */
+    public function getSensors(): Collection
+    {
+        return $this->sensors;
+    }
+
+    public function addSensor(Sensor $sensor): static
+    {
+        if (!$this->sensors->contains($sensor)) {
+            $this->sensors->add($sensor);
+            $sensor->setOrganization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSensor(Sensor $sensor): static
+    {
+        if ($this->sensors->removeElement($sensor)) {
+            // set the owning side to null (unless already changed)
+            if ($sensor->getOrganization() === $this) {
+                $sensor->setOrganization(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Queue>
+     */
+    public function getQueues(): Collection
+    {
+        return $this->queues;
+    }
+
+    public function addQueue(Queue $queue): static
+    {
+        if (!$this->queues->contains($queue)) {
+            $this->queues->add($queue);
+            $queue->setOrganization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQueue(Queue $queue): static
+    {
+        if ($this->queues->removeElement($queue)) {
+            // set the owning side to null (unless already changed)
+            if ($queue->getOrganization() === $this) {
+                $queue->setOrganization(null);
+            }
+        }
+
+        return $this;
     }
 }

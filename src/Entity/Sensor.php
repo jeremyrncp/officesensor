@@ -43,6 +43,9 @@ class Sensor
     #[ORM\OneToMany(targetEntity: SensorData::class, mappedBy: 'sensor')]
     private Collection $sensorData;
 
+    #[ORM\ManyToOne(inversedBy: 'sensors')]
+    private ?Organization $organization = null;
+
     public function __construct()
     {
         $this->sensorData = new ArrayCollection();
@@ -163,6 +166,18 @@ class Sensor
                 $sensorData->setSensor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrganization(): ?Organization
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?Organization $organization): static
+    {
+        $this->organization = $organization;
 
         return $this;
     }

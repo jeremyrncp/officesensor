@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Export index{% endblock %}
+
+{% block body %}
+    <h1>Export index</h1>
+
+    <a href="{{ path('app_export_queue_new') }}" class="btn btn-primary">Create new</a>
+
+<br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Processed date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for queue in queues %}
+            <tr>
+                <td>{{ queue.id }}</td>
+                <td>{{ queue.createdAt ? queue.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ queue.start ? queue.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ queue.end ? queue.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ queue.processedAt ? queue.processedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="export/{{ queue.fileName  }}.csv">download</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
