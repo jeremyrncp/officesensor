@@ -12,7 +12,7 @@ class ExportService
     ) {
     }
 
-    public function export(Organization $organization, \DateTime $start, \DateTime $end)
+    public function export(Organization $organization, \DateTimeInterface $start, \DateTimeInterface $end)
     {
         $sensors = $organization->getSensors();
         $exportData = [];

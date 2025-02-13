@@ -9,7 +9,7 @@ class SensorDataService
     public const ACTIVE_BIN_SEQ = "1";
     public const DEACTIVE_BIN_SEQ = "0";
 
-    public function analyse(array $sensorDatas, \DateTime $start, \DateTime $end): array
+    public function analyse(array $sensorDatas, \DateTimeInterface $start, \DateTimeInterface $end): array
     {
         $dataFilteredWithDates = [];
 
