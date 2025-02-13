@@ -49,7 +49,7 @@ class ExportService
 
     public function exportHeaders(): array
     {
-        return [
+        return [[
             "Device Id",
             "Device Type",
             "Site name",
@@ -69,6 +69,6 @@ class ExportService
             "Installation date",
             "Device status",
             "Export timestamp"
-        ];
+        ]];
     }
 }
