@@ -35,9 +35,11 @@ class ExportCommand extends Command
             $exportData = $this->exportService->export($queue->getOrganization(), $queue->getStart(), $queue->getEnd());
             $concatenedDatas = array_merge($this->exportService->exportHeaders(), $exportData);
 
-            var_dump($concatenedDatas);
+            $data = "";
 
-            $data = implode(";", $concatenedDatas);
+            foreach ($concatenedDatas as $concatenedData) {
+                $data .= implode(";", $concatenedData) . PHP_EOL;
+            }
 
             file_put_contents(__DIR__ . "/../public/export/" . $queue->getFileName() . ".csv", $data);
 
