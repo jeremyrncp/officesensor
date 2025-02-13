@@ -176,7 +176,7 @@ class ApiController extends AbstractController
             ->setDwinit($data['dw_init'])
             ->setDwInter($data['dw_inter'])
             ->setDwEnd($data['dw_end'])
-            ->setLightLevel($data['ligth_level']);
+            ->setLightLevel($data['light_level']);
 
         return $sensorData;
     }
@@ -205,7 +205,7 @@ class ApiController extends AbstractController
             ->setDwinit($data['dw_init'])
             ->setDwInter($data['dw_inter'])
             ->setDwEnd($data['dw_end'])
-            ->setLightLevel($data['ligth_level'])
+            ->setLightLevel($data['light_level'])
             ->setPrevDwinit($data['prev_dw_init'])
             ->setPrevDwIntra($data['prev_dw_intra'])
             ->setPrevDwEnd($data['prev_dw_end']);
