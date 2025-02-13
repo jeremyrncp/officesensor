@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Queue;
 use App\Entity\User;
 use App\Form\QueueType;
-use App\Repository\LoggerRepository;
 use App\Repository\QueueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,7 +17,7 @@ use Symfony\Component\Security\Core\User\InMemoryUser;
 #[Route('/export')]
 class ExportQueueController extends AbstractController
 {
-    #[Route(name: 'app_export_queue_index', methods: ['GET'])]
+    #[Route('/', name: 'app_export_queue_index', methods: ['GET'])]
     public function index(QueueRepository $queueRepository, Request $request, PaginatorInterface $paginator): Response
     {
         /** @var User $user */
